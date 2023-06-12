@@ -1,0 +1,35 @@
+openapi: 3.0.1
+info:
+  title: Weather forecasting Plugin
+  description: A plugin that allows the user to forecast the Weather conditions using ChatGPT.
+  version: 'v1'
+servers:
+  - url: http://localhost:5008
+paths:
+  /weather-forecast/{city}:
+    get:
+      operationId: getWeather
+      summary: Get the weather forecast
+      parameters:
+      - in: path
+        name: city
+        schema:
+            type: string
+        required: true
+        description: The city for the weather forecasting.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getWeatherResponse'
+
+components:
+  schemas:
+    getWeatherResponse:
+      type: object
+      properties:
+        weather:
+          type: string
+          description: The weather forecast.
